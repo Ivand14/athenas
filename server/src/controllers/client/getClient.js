@@ -4,25 +4,24 @@ const {clients,shifts} = require('../../db')
 
 const getClientController = async(name) =>{
 
+    if(!name) return await clients.findAll({include:{
+        model:shifts,
+    }})
+
+
     if(name){
         const clientByName = await clients.findAll(
-            {where:
-                {
-                    [Op.iLike] : `%${name}%`
+            {where:{
+                name:{
+                    [Op.iLike] : `%${name}%`,
                 },
-                include:{
-                    model:shifts,
-                }
+            },
+            include:{
+                model:shifts,
+            }
             }
             )
             return clientByName
-    }else{
-
-        const allClients = await clients.findAll({include:{
-            model:shifts,
-        }})
-    
-        return allClients
     }
     
 }
