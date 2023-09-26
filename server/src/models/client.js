@@ -15,6 +15,18 @@ module.exports = (sequelize) =>{
         phone:{
             type:DataTypes.BIGINT,
             allowNull:false
+        },
+        email:{
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        password:{
+            type:DataTypes.CHAR,
+            allowNull:false
+        },
+        privilege:{
+            type: DataTypes.STRING,
+            defaultValue:'Client'
         }
     },{timestamps:false})
 }

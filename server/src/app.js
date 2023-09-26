@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const routes = require('./routes/index')
 
+
 const server = express()
 server.name = server
 server.use(cors({
@@ -15,8 +16,5 @@ server.use(morgan('dev'))
 server.use(express.json())
 server.use(express.urlencoded({extended:true}))
 server.use('/',routes)
-
-
-
 
 module.exports = server

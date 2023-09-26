@@ -1,8 +1,8 @@
 const {Router} = require('express')
-const postClient = require('../../handlers/client/postClient')
+const {postClientHandler} = require('../../handlers/client/postClient')
 
 const postRouterClient = Router()
 
-postRouterClient.post('/createClient',postClient)
+postRouterClient.post('/createClient',postClientHandler)
 
 module.exports = postRouterClient
