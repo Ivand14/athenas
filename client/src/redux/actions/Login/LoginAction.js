@@ -6,7 +6,7 @@ export const createUser = (clientData) =>{
         try {
             const response = await axios.post('http://192.168.1.50:3001/createClient', clientData);
 
-            console.log('respuesta axios',response.data.token)
+            console.log('Token :',response.data)
             
             dispatch({
                 type:ACTION_TYPES.CREATE_USER,
