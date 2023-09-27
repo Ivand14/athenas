@@ -4,6 +4,7 @@ const {Sequelize} = require('sequelize')
 const shiftsModel = require('./models/shift')
 const clientModel = require('./models/client')
 
+
 const sequelize = new Sequelize(
     `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
     {logging: false, native: false},

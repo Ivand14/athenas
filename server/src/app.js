@@ -7,10 +7,9 @@ const routes = require('./routes/index')
 const server = express()
 server.name = server
 server.use(cors({
-    origin: 'http://localhost:5432',
+    origin: '*',
     credentials: true,
     methods: 'GET, POST, OPTIONS, PUT, DELETE',
-    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
 }));
 server.use(morgan('dev'))
 server.use(express.json())
