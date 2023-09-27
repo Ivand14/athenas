@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
-import {createUser} from '../../redux/actions/Login/Login'
+import {createUser} from '../../redux/actions/Login/LoginAction'
 import { useDispatch } from 'react-redux'
 import validate from './validate'
 
