@@ -1,7 +1,8 @@
 import ACTION_TYPES from "../actions/actions-type"
 
 const initialState = {
-    userRegistered : []
+    userToken :"",
+    userName:""
 }
 
 const auth = (state = initialState,action) =>{
@@ -9,7 +10,8 @@ const auth = (state = initialState,action) =>{
         case ACTION_TYPES.CREATE_USER:{
             return{
                 ...state,
-                userRegistered:[...state.userRegistered,action.payload],
+                userToken:action.payload_token,
+                userName: action.payload_name
             }
         }
         default:

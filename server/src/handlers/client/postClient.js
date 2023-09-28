@@ -53,7 +53,8 @@ const postClientHandler = async(req,res) =>{
         return res.json({
             message: 'Successful authentication',
             token: token,
-            privilege:createClient.privilege
+            privilege:createClient.privilege,
+            name:createClient.name
         })
 
     } catch (error) {

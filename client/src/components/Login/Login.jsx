@@ -1,8 +1,8 @@
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import {createUser} from '../../redux/actions/Login/LoginAction'
-import { useDispatch } from 'react-redux'
 import validate from './validate'
 
 const Login = () => {
@@ -33,12 +33,22 @@ const Login = () => {
 
         if(Object.keys(validateErrors).length === 0){
             dispatch(createUser(formAuth))
+            setFormAuth({
+                name:'',
+                phone:'',
+                email:'',
+                password:''
+            })
         }
     }
-    
+
+    const userName = useSelector(state => state.authReducer.userName)
+    const userToken = useSelector(state => state.authReducer.userToken)
     
     return (
         <View style={styles.containerInput}>
+            <Text>{userName}</Text>
+            <Text>{userToken}</Text>
             <View style={styles.allInputs}>
                 <View style={styles.containerImage}>
                     <Image
