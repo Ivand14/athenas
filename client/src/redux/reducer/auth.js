@@ -2,7 +2,8 @@ import ACTION_TYPES from "../actions/actions-type"
 
 const initialState = {
     userToken :"",
-    userName:""
+    userName:"",
+    userData:null
 }
 
 const auth = (state = initialState,action) =>{
@@ -14,9 +15,15 @@ const auth = (state = initialState,action) =>{
                 userName: action.payload_name
             }
         }
+        case ACTION_TYPES.LOGIN:{
+            console.log(state.userData)
+            return{
+                ...state,
+                userData:[action.payload]
+            }
+        }
         default:
             return state
+        }
     }
-}
-
 export default auth

@@ -3,11 +3,11 @@ const bcryptjs = require('bcryptjs')
 
 const singInClient = async(req,res) =>{
     
-    const {email,phone,password} = req.query
+    const {email,password} = req.query
     
     try {
-        if(!email || !phone || !password) return res.status(404).json({error:'Data missing'})
-        const singin = await singinController({email,phone,password})
+        if(!email || !password) return res.status(404).json({error:'Data missing'})
+        const singin = await singinController({email,password})
 
         if(singin){
             return res.status(200).json({

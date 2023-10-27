@@ -1,23 +1,26 @@
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { login } from '../../redux/actions/Login/LoginAction'
+import {createUser} from '../../redux/actions/Login/LoginAction'
 import { useNavigation } from '@react-navigation/native'
 import validate from './validate'
 
-const Login = () => {
-
+const SignUp = () => {
+    
     const dispatch = useDispatch()
-
+    const navigation = useNavigation()
+    
     
     const[formAuth,setFormAuth] = useState({
+        name:'',
+        phone:'',
         email:'',
         password:''
     })
 
-    const[error,setError] = useState({})
 
+    const[error,setError] = useState({})
 
     const onHandleChange = (property,value) =>{
         setFormAuth({...formAuth,[property]:value})
@@ -28,23 +31,46 @@ const Login = () => {
         setError(validateErrors)
 
         if(Object.keys(validateErrors).length === 0){
-            dispatch(login(formAuth.email,formAuth.password))
-            // setFormAuth({
-            //     email:'',
-            //     password:''
-            // })
+            dispatch(createUser(formAuth))
+            setFormAuth({
+                name:'',
+                phone:'',
+                email:'',
+                password:''
+            })
+            navigation.navigate('login')
         }
     }
 
     
-  return (
-    <View style={styles.containerInput}>
+    return (
+        <View style={styles.containerInput}>
             <View style={styles.allInputs}>
                 <View style={styles.containerImage}>
                     <Image
                         source={require('../../../assets/athenasLogo.png')}
                         style={styles.image}
                     />
+                </View>
+                <View>
+                    <TextInput
+                        style={styles.TextInput}
+                        onChangeText={(text)=>onHandleChange("name",text)}
+                        value={formAuth.name}
+                        placeholder='Escribi tu nombre'
+                    />
+                    {error.name && <Text style={styles.error}>{error.name}</Text>}
+                </View>
+                
+                <View>
+                    <TextInput
+                        style={styles.TextInput}
+                        onChangeText={(text)=>onHandleChange("phone",text)}
+                        value={formAuth.phone}
+                        placeholder='Tu numero de celular'
+                        keyboardType='decimal-pad'
+                    />
+                    {error.phone && <Text style={styles.error}>{error.phone}</Text>}
                 </View>
 
                 <View>    
@@ -72,14 +98,20 @@ const Login = () => {
             </View>
             <View>
                 <TouchableOpacity style={styles.button} onPress={onHandleSubmit}>
-                    <Text style={styles.textButton}>Iniciar sesión</Text>
+                    <Text style={styles.textButton}>Registrarse</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.haveAccount}>
+                <Text>Ya tenes una cuenta?</Text>
+                <TouchableOpacity>
+                    <Text style={styles.loginButton} onPress={()=>navigation.navigate('login')}>Ir al Login</Text>
                 </TouchableOpacity>
             </View>
         </View>
-  )
+    )
 }
 
-export default Login
+export default SignUp
 
 const styles = StyleSheet.create({
     containerInput:{
@@ -126,6 +158,14 @@ const styles = StyleSheet.create({
     },
     error:{
         color:'red'
+    },
+    haveAccount:{
+        marginTop:10,
+        flexDirection:'row'
+    },
+    loginButton:{
+        textDecorationLine:'underline',
+        marginLeft:5,
     }
 
 })

@@ -4,7 +4,7 @@ import axios from "axios";
 export const createUser = (clientData) =>{
     return async (dispatch) =>{
         try {
-            const response = await axios.post('http://192.168.1.50:3001/createClient', clientData);
+            const response = await axios.post('http://192.168.1.51:3001/createClient', clientData);
 
             console.log('Token :',response.data.token)
             
@@ -14,6 +14,20 @@ export const createUser = (clientData) =>{
                 payload_name:response.data.name
             })
             
+        } catch (error) {
+            console.log('error',error)
+        }
+    }
+}
+
+export const login = (email,password) =>{
+    return async(dispatch) => {
+        try {
+            const response = await axios.get(`http://192.168.1.51:3001/singIn?email=${email}&password=${password}`)
+            dispatch({
+                type: ACTION_TYPES.LOGIN,
+                payload:response.data
+            })
         } catch (error) {
             console.log(error)
         }
